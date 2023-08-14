@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
+import java.nio.channels.spi.SelectorProvider;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -51,6 +52,9 @@ public class MyServerSocketWithSelector {
     }
 
     try {
+      // 使用显式 SPI 提供程序：
+      // SelectorProvider selectorProvider = SelectorProvider.provider();
+      // selectorProvider.openSelector();
       // 将ServerSocket注册到Selector上, 并且selector对客户端连接请求感兴趣
       serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
     } catch (ClosedChannelException e) {
